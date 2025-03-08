@@ -1,0 +1,109 @@
+body {
+    background-color: #292929;
+    color: #e75500;
+}
+
+.error-message {
+    color: red;
+    font-weight: bold;
+}
+
+    /* ---------------------------------------------------------- */
+
+nav ul {
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+
+nav ul li {
+    float: left;
+}
+
+nav ul li a {
+    display: block;
+    color: rgb(228, 72, 0);
+    text-align: center;
+    padding: 14px 12px;
+    text-decoration: none;
+    font-weight: bold; /* или другое значение, например, 600 */
+    font-size: 18px;
+    }
+
+nav ul li a:hover {
+    background-color: #111;
+}
+
+
+
+
+    /* ---------------------------------------------------------- */
+
+.title {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 10px 0;
+}
+
+.form {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    min-height: 70vh;
+    padding: 10px 0;
+}
+
+.custom-button {
+    position: relative;
+    overflow: hidden;
+
+    background-color: #4CAF50;
+    color: white;
+    width: 150px;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s, transform 0.2s;
+}
+
+.custom-button:after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.3s, height 0.3s;
+}
+
+.custom-button:active:after {
+    width: 200px;
+    height: 200px;
+}
+
+.custom-button:hover {
+    background-color: #007706;
+}
+
+.custom-button:active {
+    transform: scale(0.95);
+}
+
+input[type="text"], [type="number"] {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #d86100;
+    border-radius: 4px;
+    background-color:black;
+    color:orange;
+}

@@ -1,0 +1,16 @@
+{{ define "navigation" }}
+
+    <nav>
+        <ul>
+            <li><a href="/pages/create_card">Create client</a></li>
+            <li><a href="/pages/payment">Payment</a></li>
+            <li><a href="/pages/top_up">Add funds</a></li>
+
+            <li><a href="/api/get_allcard">Get all card</a></li>
+            <li><a href="/api/get_transactions">Get transactions</a></li>
+            <li><a href="/api/get_transaction/:id">Get transaction</a></li>
+            <li><a href="/api/delete_transaction/:id">Delete transaction</a></li>
+        </ul>
+    </nav>
+
+{{ end }}

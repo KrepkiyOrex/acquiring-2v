@@ -1,0 +1,34 @@
+# ==================== for prod =============================
+
+
+# ==================== for dev (nodemon) =============================
+# FROM golang:1.20-alpine
+
+# FROM node:18-alpine
+
+# RUN apk add --no-cache nodejs npm bash git && \
+#     npm install -g nodemon
+
+# WORKDIR /app
+
+# COPY . .
+
+# CMD nodemon --exec "go test ./..."
+
+# ======================================================
+
+# Dockerfile для app-tests
+FROM golang:1.24-alpine
+
+# Установка Node.js и nodemon
+RUN apk add --no-cache nodejs npm bash git && \
+    npm install -g nodemon
+
+# Рабочая директория
+WORKDIR /app
+
+# Копирование исходного кода
+COPY . .
+
+# Команда для запуска nodemon
+CMD nodemon --exec "go test ./..."

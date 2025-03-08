@@ -1,0 +1,111 @@
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create transaction</title>
+    <!-- <link rel="shortcut icon" href="/source/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/source/style.css"> -->
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="/style.css">
+</head>
+
+<body>
+    <div class="title">
+        <h1>Add funds</h1>
+    </div>
+    
+    {{ template "navigation" . }}
+    
+    <div class="form">
+        <form action="/api/add_funds" method="POST">
+            {{ if .ErrorMessage }}
+                <p class="error-message">{{ .ErrorMessage }}</p>
+            {{ end }}
+            
+            <label for="balance">Price:</label>
+            <div class="balance-wrapper">
+                <input type="text" id="balance" name="balance" placeholder="Enter the amount" maxlength="11" required>
+            </div>
+            
+            <label for="encryptedCardNumber">Details</label>
+            <input type="text" id="encryptedCardNumber" name="encryptedCardNumber" placeholder="Enter card number" maxlength="19" required><br>
+
+            <label for="expiryDate">Expiry</label>
+            <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" required><br>
+            
+            <label for="encryptedCVV">CVV</label>
+            <input type="text" id="encryptedCVV" name="encryptedCVV" maxLength="3" placeholder="Enter CVV" required><br>
+
+            <label for="encryptedCardName">Card holder name</label>
+            <input type="text" id="encryptedCardName" name="encryptedCardName" placeholder="Enter cardholder name" required><br>
+
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+            <button type="submit" class="custom-button">
+                <i class="fas fa-shopping-cart"></i> Pay
+            </button>
+        </form>
+    </div>
+</body>
+</html>
+
+<script>
+    document.getElementById('balance').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); // Убираем все нечисловые символы
+        let formattedValue = value.replace(/\B(?=(\d{3})+(?!\d))/g, ' '); // Вставляем пробелы
+
+        e.target.value = formattedValue;
+    });
+
+    // Убираем пробелы перед отправкой на сервер
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const balanceInput = document.getElementById('balance');
+        balanceInput.value = balanceInput.value.replace(/\s+/g, ''); // Убираем пробелы перед отправкой
+    });
+</script>
+
+
+
+
+<script>
+      document.getElementById('expiryDate').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length > 2) {
+            value = value.slice(0, 2) + '/' + value.slice(2);
+        }
+        e.target.value = value.slice(0, 5);
+    });
+
+    document.getElementById('expiryDate').addEventListener('blur', function (e) {
+        const [month, year] = e.target.value.split('/');
+        const currentYear = new Date().getFullYear() % 100;
+        const maxYear = currentYear + 20;
+
+        if (!month || !year || month < 1 || month > 12 || year < currentYear || year > maxYear) {
+            alert(`Please enter a valid expiry date (MM/YY). Month: 01-12, Year: ${currentYear}-${maxYear}`);
+            e.target.value = '';
+        }
+    });
+</script>
+
+
+
+<script>
+    document.getElementById('encryptedCardNumber').addEventListener('input', function (e) {
+        let value = e.target.value.replace(/\D/g, ''); // Убираем все нечисловые символы
+        let formattedValue = '';
+
+        // Вставляем пробелы каждые 4 цифры
+        for (let i = 0; i < value.length; i += 4) {
+            formattedValue += value.slice(i, i + 4) + ' ';
+        }
+
+        // Убираем лишний пробел в конце строки
+        e.target.value = formattedValue.trim();
+    });
+
+    // Сбрасываем пробелы перед отправкой данных на сервер
+    document.querySelector('form').addEventListener('submit', function (e) {
+        const cardNumberInput = document.getElementById('encryptedCardNumber');
+        cardNumberInput.value = cardNumberInput.value.replace(/\s+/g, ''); // Убираем пробелы перед отправкой
+    });
+</script>

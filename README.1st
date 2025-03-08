@@ -1,0 +1,21 @@
+архитектура
+
+сам проект/
+        |
+        ├── acquiring
+        │   ├── Dockerfile
+        │   ├── go.mod
+        │   ├── go.sum
+        │   └── (другие файлы приложения)
+        ├── consumer-app
+        │   ├── Dockerfile
+        │   ├── go.mod
+        │   ├── go.sum
+        │   └── (другие файлы приложения)
+        |
+        ├── docker-compose.yml
+        ├── .dockerignore
+        ├── .env
+        ├── nginx.conf
+        └── (другие файлы)
+
